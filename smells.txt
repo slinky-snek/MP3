@@ -1,0 +1,5 @@
+Aaron Barnett
+acba242@uky.edu
+
+1.)	This code smell is duplicated code. The duplicate code can be extracted into a single method 
+	within the class.
