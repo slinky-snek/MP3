@@ -247,29 +247,13 @@ public abstract class IdStrategy extends AbstractDescribableImpl<IdStrategy> imp
                     } else if (c == '$') {
                         StringBuilder hex = new StringBuilder(4);
                         i++;
-                        if (i < chars.length) {
-                            hex.append(chars[i]);
-                        } else {
-                            break;
-                        }
+                        if (appendChars(chars, i, hex)) break;
                         i++;
-                        if (i < chars.length) {
-                            hex.append(chars[i]);
-                        } else {
-                            break;
-                        }
+                        if (appendChars(chars, i, hex)) break;
                         i++;
-                        if (i < chars.length) {
-                            hex.append(chars[i]);
-                        } else {
-                            break;
-                        }
+                        if (appendChars(chars, i, hex)) break;
                         i++;
-                        if (i < chars.length) {
-                            hex.append(chars[i]);
-                        } else {
-                            break;
-                        }
+                        if (appendChars(chars, i, hex)) break;
                         buf.append(Character.valueOf((char)Integer.parseInt(hex.toString(), 16)));
                     }
                 }
@@ -312,6 +296,15 @@ public abstract class IdStrategy extends AbstractDescribableImpl<IdStrategy> imp
                 return Messages.IdStrategy_CaseSensitive_DisplayName();
             }
         }
+    }
+
+    private static boolean appendChars(char[] chars, int i, StringBuilder hex) {
+        if (i < chars.length) {
+            hex.append(chars[i]);
+        } else {
+            return true;
+        }
+        return false;
     }
 
     /**
