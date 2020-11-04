@@ -145,6 +145,15 @@ public class Connection {
     public KeyAgreement diffieHellman(boolean side) throws IOException, GeneralSecurityException {
         return diffieHellman(side,512);
     }
+
+//    public KeyPair generateKeyPairWithSpec(DHParameterSpec params) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+//        KeyPair keyPair;
+//        KeyPairGenerator dh = KeyPairGenerator.getInstance("DH");
+//        dh.initialize(params);
+//        keyPair = dh.generateKeyPair();
+//        return keyPair;
+//    }
+
     public KeyAgreement diffieHellman(boolean side, int keySize) throws IOException, GeneralSecurityException {
         KeyPair keyPair;
         PublicKey otherHalf;
@@ -157,6 +166,8 @@ public class Connection {
             dh.initialize(paramGen.generateParameters().getParameterSpec(DHParameterSpec.class));
             keyPair = dh.generateKeyPair();
 
+            //keyPair = generateKeyPairWithSpec(paramGen.generateParameters().getParameterSpec(DHParameterSpec.class));
+
             // send a half and get a half
             writeKey(keyPair.getPublic());
             otherHalf = KeyFactory.getInstance("DH").generatePublic(readKey());
@@ -166,6 +177,8 @@ public class Connection {
             KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("DH");
             keyPairGen.initialize(((DHPublicKey) otherHalf).getParams());
             keyPair = keyPairGen.generateKeyPair();
+
+            //keyPair = generateKeyPairWithSpec(((DHPublicKey) otherHalf).getParams());
 
             // send a half and get a half
             writeKey(keyPair.getPublic());
@@ -177,6 +190,8 @@ public class Connection {
 
         return ka;
     }
+
+
 
     /**
      * Upgrades a connection with transport encryption by the specified symmetric cipher.
