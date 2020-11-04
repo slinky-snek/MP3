@@ -10,4 +10,5 @@ acba242@uky.edu
 4.)	This code smell is duplicated code. The code can be extracted into a single method within the 
 	class.
 
-
+6.)	This code smell is duplicated code. THe code can be extracted into a single method with the 
+	class.
